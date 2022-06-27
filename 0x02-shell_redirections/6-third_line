@@ -1,2 +1,2 @@
 #!/bin/bash
-head -n 3 file2 | tail -n 1
+head -n 3 iacta | tail -n 1
