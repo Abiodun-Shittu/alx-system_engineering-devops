@@ -3,7 +3,7 @@ This directory contains some certain scripts on shell, init files, variables and
 
 ## Tasks
 
-### 0. <o>
+### 0. \<o>
 - Create a script that creates an alias.
 	* Name: ls
 	* Value: rm *
