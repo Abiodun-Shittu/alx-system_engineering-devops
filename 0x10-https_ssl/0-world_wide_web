@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Function to display information about a specific subdomain
+
+function audit_subdomain {
+    subdomain=$1
+    domain=$2
+    host=$(dig +short $subdomain.$domain)
+    if [ -n "$host" ]; then
+        record_type=$(dig $subdomain.$domain | awk '/ANSWER SECTION/{print $4}')
+        echo "The subdomain $subdomain is a $record_type record and points to $host"
+    else
+        echo "The subdomain $subdomain does not exist"
+    fi
+}
+
+# Check for command-line arguments
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+elif [ $# -eq 1 ]; then
+    domain=$1
+    subdomains=(www lb-01 web-01 web-02)
+else
+    domain=$1
+    subdomains=($2)
+fi
+
+# Iterate over subdomains and display information
+for subdomain in "${subdomains[@]}"; do
+    audit_subdomain $subdomain $domain
+done
